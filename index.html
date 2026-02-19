@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SIU - Sistema de Inscripcion Universitaria</title>
 
-  <!-- Importación de Bootstrap 5 -->
+<!-- Importación de Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Implementación de Navbar -->
+<!-- Implementación de Navbar -->
 <nav class="navbar navbar-dark bg-dark">
   <div class="container">
     <span class="navbar-brand fw-bold">
@@ -195,27 +195,27 @@
 </section>
 
 <!-- Vista Calendario -->
-<section id="vista-calendario" class="d-none mt-4">
-  <h5 class="fw-bold mb-3">Vista Calendario de Horarios</h5>
-  <div class="table-responsive">
-    <table class="table table-bordered text-center align-middle">
-      <thead class="table-light">
-        <tr>
-          <th>Hora</th>
-          <th>Lunes</th>
-          <th>Martes</th>
-          <th>Miércoles</th>
-          <th>Jueves</th>
-          <th>Viernes</th>
-        </tr>
-      </thead>
-      <tbody id="calendario-body">
-      </tbody>
-    </table>
-  </div>
-</section>
+  <section id="vista-calendario" class="d-none mt-4">
+    <h5 class="fw-bold mb-3">Vista Calendario de Horarios</h5>
+    <div class="table-responsive">
+      <table class="table table-bordered text-center align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Hora</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+          </tr>
+        </thead>
+        <tbody id="calendario-body">
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-  <!-- Botones de Acción -->
+<!-- Botones de Acción -->
   <section class="d-flex flex-wrap justify-content-end gap-2 mt-4">
     <button class="btn btn-primary">
       Imprimir
@@ -232,20 +232,20 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-light border-top mt-5 py-3">
-  <div class="container">
-    <div class="row">
-      <div class="col text-center small text-muted">
-        <p class="fw-semibold mb-1">
-        Sistema Académico Docente · SIU-WEB v2.0
-        </p>
-        <p class="mb-0">
-        © 2026 – Uso exclusivo institucional
-        </p>
+  <footer class="bg-light border-top mt-5 py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center small text-muted">
+          <p class="fw-semibold mb-1">
+          Sistema Académico Docente · SIU-WEB v2.0
+          </p>
+          <p class="mb-0">
+          © 2026 – Uso exclusivo institucional
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -272,6 +272,7 @@
     btnCalendario.classList.replace('btn-outline-secondary', 'btn-secondary');
     btnLista.classList.replace('btn-primary', 'btn-outline-primary');
   });
+  
     /*Datos del calendario*/
     const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
 

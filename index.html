@@ -291,16 +291,31 @@
         aula: 'E201'
       },
       {
+        asignatura: 'Programación Web',
+        grupo: 'Gpo 1',
+        dia: 'Jueves',
+        hora: '15:00 - 16:40',
+        aula: 'E201'
+      },
+      {
         asignatura: 'Introducción a la Ingeniería',
         grupo: 'Gpo 3',
         dia: 'Lunes',
         hora: '08:00 - 09:40',
         aula: 'D104'
+      },
+      {
+        asignatura: 'Introducción a la Ingeniería',
+        grupo: 'Gpo 3',
+        dia: 'Miércoles',
+        hora: '08:00 - 09:40',
+        aula: 'D104'
       }
-      // ...
     ];
 
     const calendarioBody = document.getElementById('calendario-body');
+
+    const mapaCalendario = {};
 
     horas.forEach(hora => {
       const fila = document.createElement('tr');
@@ -312,23 +327,31 @@
       dias.forEach(dia => {
         const celda = document.createElement('td');
 
-        const clase = horarios.find(h =>
-          h.dia === dia && h.hora === hora
-        );
-
-        if (clase) {
-          celda.innerHTML = `
-            <strong>${clase.asignatura}</strong><br>
-            ${clase.grupo}<br>
-            Aula ${clase.aula}
-          `;
-        }
+        // Clave única: "Lunes|08:00 - 09:40"
+        const clave = `${dia}|${hora}`;
+        mapaCalendario[clave] = celda;
 
         fila.appendChild(celda);
       });
 
       calendarioBody.appendChild(fila);
     });
+
+    horarios.forEach(h => {
+      const clave = `${h.dia}|${h.hora}`;
+      const celda = mapaCalendario[clave];
+
+      if (celda) {
+        celda.innerHTML = `
+          <div class="p-2 bg-primary-subtle rounded small">
+            <strong>${h.asignatura}</strong><br>
+            ${h.grupo}<br>
+            Aula ${h.aula}
+          </div>
+        `;
+      }
+    });
+
   </script>
 </body>
 </html>

@@ -275,83 +275,67 @@
     /*Datos del calendario*/
     const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
 
-    const horas = [
-      '08:00 - 09:40',
-      '10:00 - 11:40',
-      '13:00 - 14:40',
-      '15:00 - 16:40'
+    const bloquesHora = [
+      { id: 1, texto: '08:00 - 09:40' },
+      { id: 2, texto: '10:00 - 11:40' },
+      { id: 3, texto: '13:00 - 14:40' },
+      { id: 4, texto: '15:00 - 16:40' }
     ];
 
     const horarios = [
-      {
-        asignatura: 'Programación Web',
-        grupo: 'Gpo 1',
-        dia: 'Martes',
-        hora: '10:00 - 11:40',
-        aula: 'E201'
-      },
-      {
-        asignatura: 'Programación Web',
-        grupo: 'Gpo 1',
-        dia: 'Jueves',
-        hora: '15:00 - 16:40',
-        aula: 'E201'
-      },
-      {
-        asignatura: 'Introducción a la Ingeniería',
-        grupo: 'Gpo 3',
-        dia: 'Lunes',
-        hora: '08:00 - 09:40',
-        aula: 'D104'
-      },
-      {
-        asignatura: 'Introducción a la Ingeniería',
-        grupo: 'Gpo 3',
-        dia: 'Miércoles',
-        hora: '08:00 - 09:40',
-        aula: 'D104'
-      }
+      { asignatura: 'Programación Web', grupo: 'Gpo 1', dia: 'Martes', bloqueId: 2, aula: 'E201', color: '#0d6efd' },
+      { asignatura: 'Programación Web', grupo: 'Gpo 1', dia: 'Jueves', bloqueId: 4, aula: 'E201', color: '#0d6efd' },
+
+      { asignatura: 'Introducción a la Ingeniería', grupo: 'Gpo 3', dia: 'Lunes', bloqueId: 1, aula: 'D104', color: '#198754' },
+      { asignatura: 'Introducción a la Ingeniería', grupo: 'Gpo 3', dia: 'Miércoles', bloqueId: 1, aula: 'D104', color: '#198754' },
+
+      { asignatura: 'Introducción a la Ingeniería', grupo: 'Gpo 4', dia: 'Lunes', bloqueId: 2, aula: 'E201', color: '#ffc107' },
+      { asignatura: 'Introducción a la Ingeniería', grupo: 'Gpo 4', dia: 'Jueves', bloqueId: 1, aula: 'E201', color: '#ffc107' },
+
+      { asignatura: 'Introducción a la Ingeniería', grupo: 'Gpo 7', dia: 'Lunes', bloqueId: 4, aula: 'D104', color: '#6f42c1' },
+      { asignatura: 'Introducción a la Ingeniería', grupo: 'Gpo 7', dia: 'Jueves', bloqueId: 3, aula: 'D104', color: '#6f42c1' },
+
+      { asignatura: 'Introducción a la Ingeniería', grupo: 'Gpo 8', dia: 'Martes', bloqueId: 4, aula: 'D104', color: '#dc3545' },
+      { asignatura: 'Introducción a la Ingeniería', grupo: 'Gpo 8', dia: 'Miércoles', bloqueId: 3, aula: 'D104', color: '#dc3545' }
     ];
 
-    const calendarioBody = document.getElementById('calendario-body');
+    /*Generación del calendario*/
+      const calendarioBody = document.getElementById('calendario-body');
+      calendarioBody.innerHTML = '';
 
-    const mapaCalendario = {};
+      bloquesHora.forEach(bloque => {
+        const fila = document.createElement('tr');
 
-    horas.forEach(hora => {
-      const fila = document.createElement('tr');
+        const th = document.createElement('th');
+        th.textContent = bloque.texto;
+        fila.appendChild(th);
 
-      const celdaHora = document.createElement('th');
-      celdaHora.textContent = hora;
-      fila.appendChild(celdaHora);
+        dias.forEach(dia => {
+          const td = document.createElement('td');
+          td.dataset.dia = dia;
+          td.dataset.bloque = bloque.id;
+          fila.appendChild(td);
+        });
 
-      dias.forEach(dia => {
-        const celda = document.createElement('td');
-
-        // Clave única: "Lunes|08:00 - 09:40"
-        const clave = `${dia}|${hora}`;
-        mapaCalendario[clave] = celda;
-
-        fila.appendChild(celda);
+        calendarioBody.appendChild(fila);
       });
 
-      calendarioBody.appendChild(fila);
-    });
+    /*Renderizado de horarios en el calendario*/
+      horarios.forEach(h => {
+    const celda = document.querySelector(
+      `td[data-dia="${h.dia}"][data-bloque="${h.bloqueId}"]`
+    );
 
-    horarios.forEach(h => {
-      const clave = `${h.dia}|${h.hora}`;
-      const celda = mapaCalendario[clave];
+    if (!celda) return;
 
-      if (celda) {
-        celda.innerHTML = `
-          <div class="p-2 bg-primary-subtle rounded small">
-            <strong>${h.asignatura}</strong><br>
-            ${h.grupo}<br>
-            Aula ${h.aula}
-          </div>
-        `;
-      }
-    });
-
+    celda.innerHTML += `
+      <div class="p-2 mb-1 rounded text-white small" style="background:${h.color}">
+        <strong>${h.asignatura}</strong><br>
+        ${h.grupo}<br>
+        Aula ${h.aula}
+      </div>
+    `;
+  });
   </script>
 </body>
 </html>

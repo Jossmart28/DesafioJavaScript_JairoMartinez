@@ -55,7 +55,7 @@
 </section>
 
 <!-- Vista Lista -->
-<section id="vista-lista"></section>
+<section id="vista-lista">
   <section class="table-responsive">
     <table class="table table-striped table-hover">
     <thead>
@@ -234,5 +234,29 @@
 </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const btnLista = document.getElementById('btnLista');
+    const btnCalendario = document.getElementById('btnCalendario');
+
+    const vistaLista = document.getElementById('vista-lista');
+    const vistaCalendario = document.getElementById('vista-calendario');
+
+    btnLista.addEventListener('click', () => {
+      vistaLista.classList.remove('d-none');
+      vistaCalendario.classList.add('d-none');
+
+      btnLista.classList.replace('btn-outline-primary', 'btn-primary');
+      btnCalendario.classList.replace('btn-secondary', 'btn-outline-secondary');
+    });
+
+    btnCalendario.addEventListener('click', () => {
+      vistaCalendario.classList.remove('d-none');
+      vistaLista.classList.add('d-none');
+
+      btnCalendario.classList.replace('btn-outline-secondary', 'btn-secondary');
+      btnLista.classList.replace('btn-primary', 'btn-outline-primary');
+    });
+  </script>
 </body>
 </html>

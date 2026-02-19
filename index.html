@@ -250,7 +250,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    /*Toggle de Vistas*/
+    /*Toggle de vistas*/
     const btnLista = document.getElementById('btnLista');
     const btnCalendario = document.getElementById('btnCalendario');
 
@@ -261,19 +261,18 @@
       vistaLista.classList.remove('d-none');
       vistaCalendario.classList.add('d-none');
 
-      btnLista.classList.replace('btn-outline-primary', 'btn-primary');
-      btnCalendario.classList.replace('btn-secondary', 'btn-outline-secondary');
-    });
+    btnLista.classList.replace('btn-outline-primary', 'btn-primary');
+    btnCalendario.classList.replace('btn-secondary', 'btn-outline-secondary');
+  });
 
     btnCalendario.addEventListener('click', () => {
       vistaCalendario.classList.remove('d-none');
       vistaLista.classList.add('d-none');
 
-      btnCalendario.classList.replace('btn-outline-secondary', 'btn-secondary');
-      btnLista.classList.replace('btn-primary', 'btn-outline-primary');
-    });
-
-    /*Estructura base del calendario*/
+    btnCalendario.classList.replace('btn-outline-secondary', 'btn-secondary');
+    btnLista.classList.replace('btn-primary', 'btn-outline-primary');
+  });
+    /*Datos del calendario*/
     const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
 
     const horas = [
@@ -283,19 +282,48 @@
       '15:00 - 16:40'
     ];
 
+    const horarios = [
+      {
+        asignatura: 'Programación Web',
+        grupo: 'Gpo 1',
+        dia: 'Martes',
+        hora: '10:00 - 11:40',
+        aula: 'E201'
+      },
+      {
+        asignatura: 'Introducción a la Ingeniería',
+        grupo: 'Gpo 3',
+        dia: 'Lunes',
+        hora: '08:00 - 09:40',
+        aula: 'D104'
+      }
+      // ...
+    ];
+
     const calendarioBody = document.getElementById('calendario-body');
 
     horas.forEach(hora => {
       const fila = document.createElement('tr');
 
-      // Columna de hora
       const celdaHora = document.createElement('th');
       celdaHora.textContent = hora;
       fila.appendChild(celdaHora);
 
-      // Columnas por día
-      dias.forEach(() => {
+      dias.forEach(dia => {
         const celda = document.createElement('td');
+
+        const clase = horarios.find(h =>
+          h.dia === dia && h.hora === hora
+        );
+
+        if (clase) {
+          celda.innerHTML = `
+            <strong>${clase.asignatura}</strong><br>
+            ${clase.grupo}<br>
+            Aula ${clase.aula}
+          `;
+        }
+
         fila.appendChild(celda);
       });
 
